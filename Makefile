@@ -1,8 +1,10 @@
 CC = g++
 CFLAG = --std=c++11
 OBJ = main.o \
-      diamondsquare.o
-HEADERS = diamondsquare.h
+      diamondsquare.o \
+      heightmapDrawer.o \
+      lodepng.o
+HEADERS = $(wildcard *.h)
 EXEC = ds
 
 all : main

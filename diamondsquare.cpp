@@ -130,3 +130,15 @@ bool DiamondSquare::isValid(int x, int y, int size) {
 double DiamondSquare::drand() {
     return (*(dist))((*mt));
 }
+
+void DiamondSquare::normalizeValues(double *values, int size) {
+    double max = -1.0 / 0.0, min = 1.0 / 0.0;
+    for (int i = 0; i < size; i++) {
+	max = std::max(values[i], max);
+        min = std::min(values[i], min);
+    }
+    for (int i = 0; i < size; i++) {
+        values[i] -= min;
+        values[i] /= (max - min);
+    }
+}

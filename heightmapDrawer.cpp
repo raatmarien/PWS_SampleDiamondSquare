@@ -1,5 +1,4 @@
- /*
-A simple implementation of the diamond-square algorithm in 2D
+/*
 Copyright (C) 2015  Marien Raat
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -13,25 +12,22 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "diamondsquare.h"
 #include "heightmapDrawer.h"
-#include <iostream>
+#include "lodepng.h" // Png writing
+#include <vector>
 
-int main(int argc, char **argv) {
-    int size = 1025;
-    double *map = (double*) calloc(size * size, sizeof(double));
-    DiamondSquare ds;
-    ds.generateMap(size, 0.5, map, size);
-    ds.normalizeValues(map, size * size);
-    // Print the values
-    for (int y = 0; y < size; y++) {
-	for (int x = 0; x < size; x++) {
-	    std::cout << map[x + y * size] << "\n";
-	}
+void HeightmapDrawer::drawValues(double *values, unsigned width
+			       , unsigned height, const char *filename) {
+    std::vector<unsigned char> image;
+    image.resize(width * height * 4);
+    for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++) {
+            unsigned char value = values[y * width + x] * 255;
+            image[4 * width * y + 4 * x + 0] = value;
+            image[4 * width * y + 4 * x + 1] = value;
+            image[4 * width * y + 4 * x + 2] = value;
+            image[4 * width * y + 4 * x + 3] = 255;
+        }
     }
-    // Save values to png file
-    HeightmapDrawer heightmapDrawer;
-    const char *filename = "heightmap.png";
-    heightmapDrawer.drawValues(map, size, size, filename);
-    return 0;
+    lodepng::encode(filename, image, width, height);
 }
