@@ -28,9 +28,6 @@ struct PassSettings {
 class DiamondSquare {
 public:
     DiamondSquare();
-    std::random_device *randomD;
-    std::mt19937 *mt;
-    std::normal_distribution<double> *dist;
 
     double* generateMap
     (int size, // Size of the square, should be a power of 2 plus 1
@@ -42,11 +39,18 @@ public:
      int startPassSize // The pass size to start with, usefull for
                        // doing the first few passes manually
      ); // Returns a pointer to an array of the length size * size
+
+    void normalizeValues(double *values, int size);
+
+private:
     void passDiamondSquare(PassSettings *settings);
     void diamond(int x, int y, PassSettings *settings);
     void square(int x, int y, PassSettings *settings);
     bool isValid(int x, int y, int size);
     double drand(); // Returns a double between -1 and 1
 
-    void normalizeValues(double *values, int size);
+    std::random_device *randomD;
+    std::mt19937 *mt;
+    std::normal_distribution<double> *dist;
 };
+
