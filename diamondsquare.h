@@ -35,11 +35,12 @@ public:
     double* generateMap
     (int size, // Size of the square, should be a power of 2 plus 1
      double h, // The displacement will be decreased by 2 ^ (- h) each pass
-     // A high h-value will result in a smooth map and a low h-value
-     // will result in a rough map
-     double *map, // The array of doubles to fill
-     int startPassSize // The pass size to start with, usefull for doing the first few
-     // passes manually
+               // A high h-value will result in a smooth map and a low h-value
+               // will result in a rough map
+     double *map, // The array of doubles to fill, should be allocated
+                  // and filled with zeroes, for example with `calloc`
+     int startPassSize // The pass size to start with, usefull for
+                       // doing the first few passes manually
      ); // Returns a pointer to an array of the length size * size
     void passDiamondSquare(PassSettings *settings);
     void diamond(int x, int y, PassSettings *settings);
