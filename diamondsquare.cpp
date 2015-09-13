@@ -1,4 +1,4 @@
- /*
+/*
 A simple implementation of the diamond-square algorithm in 2D
 Copyright (C) 2015  Marien Raat
 This program is free software: you can redistribute it and/or modify
@@ -14,7 +14,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "diamondsquare.h"
 #include <math.h>
-#include <vector>
 #include <iostream>
 
 DiamondSquare::DiamondSquare() {
